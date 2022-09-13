@@ -32,12 +32,6 @@ const createCollege = async function (req, res) {
             return res.status(404).send({ status: false, message: "LogoLink must be an Array" })
         }
 
-        if (body.isDeleted) {
-            if (typeof body.isDeleted !== "boolean") {
-                return res.status(404).send({ status: false, message: "LogoLink must be an Boolean" })
-            }
-        }
-
         let data = await collegeModel.create(body)
         return res.status(201).send({ status: true, data: data })
     }
