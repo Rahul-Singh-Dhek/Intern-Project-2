@@ -11,16 +11,24 @@ email:{
     type:String,
     trim:true,
     lowercase:true,
-    unique:true
+    unique:true,
+    match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+]
 },
     mobile:{
         type:Number,
-        require:true,
+        require:"plz enter valid mobile",
         unique:true,
-        trim:true
+        trim:true,
+        match: [/^[0-9]\d{10}$/ ]
     },
     collegeId:{
+<<<<<<< HEAD
         type:ObjectId, ref:"college",
+=======
+        type:ObjectId,
+         ref:"college",
+>>>>>>> 64589097ba7a21b429b48b8574fc06c95092874b
         require:true
 
     },
