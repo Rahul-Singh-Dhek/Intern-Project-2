@@ -22,6 +22,16 @@ const isValidId = function (data) {
     return mongoose.Types.ObjectId.isValid(data);
   };
 
+const isValidShortName=function(name){
+    if(/^[a-z]{2,20}$/i.test(name)){
+        return true
+    }
+}
+const isValidFullName=function(fullname){
+    if(/^[a-z ,]{2,200}$/i.test(fullname)){
+        return true
+    }
+}
 
 
-  module.exports={isValidEmail,isValidId,isValidMobile,isValidName}
+  module.exports={isValidEmail,isValidId,isValidMobile,isValidName,isValidShortName,isValidFullName}

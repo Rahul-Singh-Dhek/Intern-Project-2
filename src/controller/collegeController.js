@@ -1,6 +1,8 @@
 
 const collegeModel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
+const validator = require("../validators/validators")
+
 
 
 const createCollege = async function (req, res) {
@@ -12,7 +14,7 @@ const createCollege = async function (req, res) {
         if (!body.name) {
             return res.status(400).send({ status: false, message: "Please provide name of the college" })
         }
-        if (!(/^[a-z]{2,20}$/i.test(body.name))) {
+        if (!validator.isValidShortName(body.name)) {
             return res.status(400).send({ status: false, message: "Name can contain only letters" })
         }
         let name = await collegeModel.findOne({ name: body.name })
@@ -22,7 +24,7 @@ const createCollege = async function (req, res) {
         if (!body.fullName) {
             return res.status(400).send({ status: false, message: "Please provide fullName of the college" })
         }
-        if (!(/^[a-z ,]{2,200}$/i.test(body.fullName))) {
+        if (!validator.isValidFullName(body.fullName)) {
             return res.status(400).send({ status: false, message: "fullName can contain only letters,space and comma" })
         }
         if (!body.logoLink) {
@@ -47,7 +49,7 @@ const collegeDetails = async function (req, res) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
         let collegeDetail = await collegeModel.findOne({ name: collegeName })
-        console.log(collegeDetail);
+        // console.log(collegeDetail);
         if (!collegeDetail) {
             return res.status(404).send({ status: false, message: "No college exists with this Name" })
         }
@@ -57,8 +59,8 @@ const collegeDetails = async function (req, res) {
             return res.status(404).send({ status: false, message: "No interns found of this college" })
         }
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
-        console.log(data);
-        return res.status(200).send({data:data})
+        // console.log(data);
+        return res.status(200).send({data:data,status:true})
     }
     catch (err) {
     }
