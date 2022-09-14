@@ -11,16 +11,21 @@ email:{
     type:String,
     trim:true,
     lowercase:true,
-    unique:true
+    unique:true,
+    match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+]
 },
     mobile:{
         type:Number,
         require:true,
         unique:true,
-        trim:true
+        trim:true,
+        match: [/^[6-9]\d{9}$/
+        ]
     },
     collegeId:{
-        type:mongoose.Types.ObjectId, ref:"college",
+        type:ObjectId,
+         ref:"college",
         require:true
 
     },
