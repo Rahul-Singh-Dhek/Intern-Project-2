@@ -17,7 +17,7 @@ const createCollege = async function (req, res) {
         if (!validator.isValidShortName(body.name)) {
             return res.status(400).send({ status: false, message: "Name can contain only letters" })
         }
-        let name = await collegeModel.findOne({ name: body.name })
+        let name = await collegeModel.findOne({ name: body.name,isDeleted:false })
         if (name) {
             return res.status(400).send({ status: false, message: "Please provide unique name" })
         }
@@ -47,15 +47,15 @@ const collegeDetails = async function (req, res) {
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
-        let collegeDetail = await collegeModel.findOne({ name: collegeName })
+        let collegeDetail = await collegeModel.findOne({ name: collegeName , isDeleted:false})
         if (!collegeDetail) {
             return res.status(404).send({ status: false, message: "No college exists with this Name" })
         }
         let ColId = collegeDetail["_id"]
-        let Interns = await internModel.find({ collegeId: ColId }).select({name:1,email:1,mobile:1})
-        if (Interns.length == 0) {
-            return res.status(404).send({ status: false, message: "No interns found of this college" })
-        }
+        let Interns = await internModel.find({ collegeId: ColId ,isDeleted:false}).select({name:1,email:1,mobile:1})
+        // if (Interns.length == 0) {
+        //     return res.status(404).send({ status: false, message: "No interns found of this college" })
+        // }
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
         return res.status(200).send({data:data,status:true})
     }

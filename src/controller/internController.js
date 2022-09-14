@@ -18,16 +18,16 @@ const createIntern = async function (req, res) {
         
         if (!mobile) return res.status(400), send({ status: false, msg: "mobile must be required." })
         if (!validator.isValidMobile(mobile)) return res.status(400).send({ status: false, msg: "Please enter valid mobile." })
-        let doc= await internModel.findOne({ mobile: mobile })
+        let doc= await internModel.findOne({ mobile: mobile,isDeleted:false })
         if (doc) return res.status(400).send({ status: false, msg: "mobile is already registered." })
         
         if (!email) return res.status(400).send({ status: false, msg: "email must be required." })
         if (!validator.isValidEmail(email)) return res.status(400).send({ status: false, msg: "Please enter valid email." })
-        doc = await internModel.findOne({ email: email })
+        doc = await internModel.findOne({ email: email,isDeleted:false })
         if (doc) return res.status(400).send({ status: false, msg: "email is already registered." })
 
         if (!collegeName) return res.status(400).send({ status: false, msg: "collegeName must be required." })
-        let collegeDetails = await collegeModel.findOne({ name: collegeName }).select({ id: 1 })
+        let collegeDetails = await collegeModel.findOne({ name: collegeName ,isDeleted:false}).select({ id: 1 })
         if (!collegeDetails) return res.status(400).send({ status: false, msg: "college not found..Please try with another college Name." })
         let ID = collegeDetails["_id"]
         data["collegeId"] = ID
