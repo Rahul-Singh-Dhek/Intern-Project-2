@@ -2,7 +2,7 @@ const {default: mongoose} = require('mongoose')
 
 
 const isValidEmail = function (mail) {
-    if (/^[a-z0-9_]{3,}@[a-z]{3,}[.]{1}[a-z]{3,6}$/.test(mail)) {
+    if (/^[a-z0-9_]{3,}@[a-z]{3,}[.]{1}[a-z]{3}$/.test(mail)) {
     return true;
     }
 }
@@ -23,7 +23,7 @@ const isValidId = function (data) {
   };
 
 const isValidShortName=function(name){
-    if(/^[a-z]{2,20}$/i.test(name)){
+    if(/^[a-z]{2,10}$/i.test(name)){
         return true
     }
 }

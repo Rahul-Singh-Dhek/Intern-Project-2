@@ -25,7 +25,7 @@ const createCollege = async function (req, res) {
             return res.status(400).send({ status: false, message: "Please provide fullName of the college" })
         }
         if (!validator.isValidFullName(body.fullName)) {
-            return res.status(400).send({ status: false, message: "fullName can contain only letters,space and comma" })
+            return res.status(400).send({ status: false, message: "fullName can contain only letters,space,comma,'&',and '-' " })
         }
         if (!body.logoLink) {
             return res.status(400).send({ status: false, message: "Please provide logoLink of the college" })
