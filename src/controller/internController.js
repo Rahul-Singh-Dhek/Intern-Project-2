@@ -7,7 +7,7 @@ const collegeModel = require("../models/collegeModel")
 const createIntern = async function (req, res) {
     try {
         const data = req.body
-        if (Object.keys(data).length == 0) return res.status(404).send({ status: false, msg: "Data must be present." })
+        if (Object.keys(data).length == 0) return res.status(404).send({ status: false, msg: "Please provide Intern Details." })
 
         let { name, email, mobile, collegeName } = data
 
@@ -27,7 +27,7 @@ const createIntern = async function (req, res) {
         if (doc) return res.status(400).send({ status: false, msg: "email is already registered." })
 
         if (!collegeName) return res.status(400).send({ status: false, msg: "collegeName must be required." })
-        let collegeDetails = await collegeModel.findOne({ name: collegeName ,isDeleted:false}).select({ id: 1 })
+        let collegeDetails = await collegeModel.findOne({ name: collegeName ,isDeleted:false})
         if (!collegeDetails) return res.status(400).send({ status: false, msg: "college not found..Please try with another college Name." })
         let ID = collegeDetails["_id"]
         data["collegeId"] = ID
