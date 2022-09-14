@@ -42,14 +42,12 @@ const createCollege = async function (req, res) {
 }
 
 const collegeDetails = async function (req, res) {
-    console.log("I am in");
     try {
         let collegeName = req.query.collegeName
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
         let collegeDetail = await collegeModel.findOne({ name: collegeName })
-        // console.log(collegeDetail);
         if (!collegeDetail) {
             return res.status(404).send({ status: false, message: "No college exists with this Name" })
         }
@@ -59,7 +57,6 @@ const collegeDetails = async function (req, res) {
             return res.status(404).send({ status: false, message: "No interns found of this college" })
         }
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
-        // console.log(data);
         return res.status(200).send({data:data,status:true})
     }
     catch (err) {
