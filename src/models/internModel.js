@@ -15,7 +15,7 @@ email:{
 
 },
     mobile:{
-        type:Number,
+        type:String,
         require:true,
         unique:true
     },
@@ -30,7 +30,6 @@ email:{
         default:false
     }
 },{timestamps:true})
-
 
 
 
