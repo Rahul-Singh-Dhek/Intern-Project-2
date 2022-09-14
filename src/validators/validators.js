@@ -28,7 +28,7 @@ const isValidShortName=function(name){
     }
 }
 const isValidFullName=function(fullname){
-    if(/^[a-z ,]{2,200}$/i.test(fullname)){
+    if(/^[a-z ,&-]{2,200}$/i.test(fullname)){
         return true
     }
 }
