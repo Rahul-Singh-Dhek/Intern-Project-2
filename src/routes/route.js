@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const collegeController=require("../controller/collegeController.js")
-console.log(router)
+//========================================================CollegeApi=================================================================
 router.post("/functionup/colleges",collegeController.createCollege)
+router.get("/functionup/collegeDetails",collegeController.collegeDetails)
+
 
 
 
