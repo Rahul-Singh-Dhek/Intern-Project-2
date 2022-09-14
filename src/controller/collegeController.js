@@ -62,5 +62,6 @@ const collegeDetails = async function (req, res) {
     catch (err) {
     }
 }
+
 module.exports.collegeDetails=collegeDetails
 module.exports.createCollege = createCollege
