@@ -17,11 +17,10 @@ email:{
 },
     mobile:{
         type:Number,
-        require:true,
+        require:"plz enter valid mobile",
         unique:true,
         trim:true,
-        match: [/^[6-9]\d{9}$/
-        ]
+        match: [/^[0-9]\d{10}$/ ]
     },
     collegeId:{
         type:ObjectId,
