@@ -20,7 +20,7 @@ email:{
         trim:true
     },
     collegeId:{
-        type:mongoose.Types.ObjectId, ref:"college",
+        type:ObjectId, ref:"college",
         require:true
 
     },

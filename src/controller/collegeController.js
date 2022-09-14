@@ -29,7 +29,7 @@ const createCollege = async function (req, res) {
             return res.status(400).send({ status: false, message: "Please provide logoLink of the college" })
         }
         if (typeof body.logoLink !== "string") {
-            return res.status(400).send({ status: false, message: "LogoLink must be an Array" })
+            return res.status(400).send({ status: false, message: "LogoLink is Invalid" })
         }
         let data = await collegeModel.create(body)
         return res.status(201).send({ status: true, data: data })
@@ -46,7 +46,7 @@ const collegeDetails = async function (req, res, next) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
         let collegeDetail = await collegeName.findOne({ name: collegeName })
-        console.log(collegeDetail);
+        // console.log(collegeDetail);
         if (!collegeDetail) {
             return res.status(404).send({ status: false, message: "No college exists with this Name" })
         }
@@ -56,7 +56,7 @@ const collegeDetails = async function (req, res, next) {
             return res.status(404).send({ status: false, message: "No interns found of this college" })
         }
         let data={...collegeDetail,interns:Interns}
-        console.log(data);
+        // console.log(data);
         return res.status(200).send({data:data})
     }
     catch (err) {
