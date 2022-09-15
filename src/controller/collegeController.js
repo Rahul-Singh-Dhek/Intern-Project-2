@@ -11,10 +11,10 @@ const createCollege = async function (req, res) {
         if ((Object.keys(req.body)).length == 0) {
             return res.status(400).send({ status: false, message: "Please provide details of the college" })
         }
-        body.name=body.name.toLowerCase()
         if (!body.name) {
             return res.status(400).send({ status: false, message: "Please provide name of the college" })
         }
+        body.name=body.name.toLowerCase()
         if (!validator.isValidShortName(body.name)) {
             return res.status(400).send({ status: false, message: "Name can contain only letters" })
         }
@@ -44,11 +44,11 @@ const createCollege = async function (req, res) {
 
 const collegeDetails = async function (req, res) {
     try {
-        let collegeName = req.query.collegeName.toLowerCase()
+        let collegeName = req.query.collegeName
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
-        let collegeDetail = await collegeModel.findOne({ name: collegeName , isDeleted:false})
+        let collegeDetail = await collegeModel.findOne({ name: collegeName.toLowerCase() , isDeleted:false})
         if (!collegeDetail) {
             return res.status(404).send({ status: false, message: "No college exists with this Name" })
         }
