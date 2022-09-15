@@ -37,9 +37,6 @@ const createCollege = async function (req, res) {
         if (!body.logoLink) {
             return res.status(400).send({ status: false, message: "Please provide logoLink of the college" })
         }
-        // if (typeof body.logoLink !== "string") {
-        //     return res.status(400).send({ status: false, message: "LogoLink is Invalid" })
-        // }
         if(!validator.isValidLink(body.logoLink)){
             return res.status(400).send({status:false,message:"LogoLink is invalid"})
         }
@@ -66,9 +63,11 @@ const collegeDetails = async function (req, res) {
         }
         let ColId = collegeDetail["_id"]
         let Interns = await internModel.find({ collegeId: ColId ,isDeleted:false}).select({name:1,email:1,mobile:1})
+        //-----------------------------------------------------------------------------------------------------------
         // if (Interns.length == 0) {
         //     return res.status(404).send({ status: false, message: "No interns found of this college" })
         // }
+        //------------------------------------------------------------------------------------------------------------
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
         return res.status(200).send({data:data,status:true})
     }
