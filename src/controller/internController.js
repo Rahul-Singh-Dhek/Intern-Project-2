@@ -27,8 +27,7 @@ const createIntern = async function (req, res) {
         if (!validator.isValidShortName(collegeName)) return res.status(400).send({ status: false, message: "collegeName can contain only letters" })
         let collegeDetails = await collegeModel.findOne({ name: collegeName.toLowerCase() ,isDeleted:false})
         if (!collegeDetails) return res.status(400).send({ status: false, msg: "college not found..Please try with another college Name." })
-        let ID = collegeDetails["_id"]
-        data["collegeId"] = ID
+        data["collegeId"]  = collegeDetails["_id"]
         
         let result = await internModel.create(data)
         return res.status(201).send({ status: true, data: result })
