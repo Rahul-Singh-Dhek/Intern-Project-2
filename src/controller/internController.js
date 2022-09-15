@@ -8,11 +8,8 @@ const createIntern = async function (req, res) {
     try {
         const data = req.body
         if (Object.keys(data).length == 0) return res.status(404).send({ status: false, msg: "Please provide Intern Details." })
-        data.collegeName=data.collegeName.toLowerCase()
         let { name, email, mobile, collegeName } = data
-
         //edge cases
-
         if (!name) return res.status(400).send({ status: false, msg: "Intern name must be required." })
         if (!validator.isValidName(name)) return res.status(400).send({ status: false, msg: "Intern name must consist of only leters." })
         
@@ -27,7 +24,8 @@ const createIntern = async function (req, res) {
         if (doc) return res.status(400).send({ status: false, msg: "email is already registered." })
 
         if (!collegeName) return res.status(400).send({ status: false, msg: "collegeName must be required." })
-        let collegeDetails = await collegeModel.findOne({ name: collegeName ,isDeleted:false})
+        if (!validator.isValidShortName(collegeName)) return res.status(400).send({ status: false, message: "collegeName can contain only letters" })
+        let collegeDetails = await collegeModel.findOne({ name: collegeName.toLowerCase() ,isDeleted:false})
         if (!collegeDetails) return res.status(400).send({ status: false, msg: "college not found..Please try with another college Name." })
         let ID = collegeDetails["_id"]
         data["collegeId"] = ID

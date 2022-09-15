@@ -28,6 +28,12 @@ const createCollege = async function (req, res) {
         if (!validator.isValidFullName(body.fullName)) {
             return res.status(400).send({ status: false, message: "fullName can contain only letters,space,comma,'&',and '-' " })
         }
+        //-----------------------------------------------------------------------------------------------------------------
+        let fullName = await collegeModel.findOne({ fullName: body.fullName,isDeleted:false })
+        if(fullName){
+            return res.status(400).send({ status: false, message: "Please provide unique fullName" })
+        }
+        //-----------------------------------------------------------------------------------------------------------------
         if (!body.logoLink) {
             return res.status(400).send({ status: false, message: "Please provide logoLink of the college" })
         }
@@ -47,6 +53,9 @@ const collegeDetails = async function (req, res) {
         let collegeName = req.query.collegeName
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
+        }
+        if (!validator.isValidShortName(collegeName)) {
+            return res.status(400).send({ status: false, message: "collegeName can contain only letters" })
         }
         let collegeDetail = await collegeModel.findOne({ name: collegeName.toLowerCase() , isDeleted:false})
         if (!collegeDetail) {

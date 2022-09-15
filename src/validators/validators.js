@@ -23,7 +23,7 @@ const isValidId = function (data) {
   };
 
 const isValidShortName=function(name){
-    if(/^[a-z]{2,10}$/i.test(name)){
+    if(/^[a-z]{2,20}$/i.test(name)){
         return true
     }
 }
