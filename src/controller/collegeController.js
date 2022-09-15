@@ -11,6 +11,7 @@ const createCollege = async function (req, res) {
         if ((Object.keys(req.body)).length == 0) {
             return res.status(400).send({ status: false, message: "Please provide details of the college" })
         }
+        body.name=body.name.toLowerCase()
         if (!body.name) {
             return res.status(400).send({ status: false, message: "Please provide name of the college" })
         }
@@ -43,7 +44,7 @@ const createCollege = async function (req, res) {
 
 const collegeDetails = async function (req, res) {
     try {
-        let collegeName = req.query.collegeName
+        let collegeName = req.query.collegeName.toLowerCase()
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide a college Name" })
         }
@@ -57,7 +58,7 @@ const collegeDetails = async function (req, res) {
         //     return res.status(404).send({ status: false, message: "No interns found of this college" })
         // }
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
-        return res.status(200).send({data:data,status:true})
+        return res.status(200).send({data:data})
     }
     catch (err) {
         return res.status(500).send({ status: false, message: err.message })

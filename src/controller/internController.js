@@ -8,7 +8,7 @@ const createIntern = async function (req, res) {
     try {
         const data = req.body
         if (Object.keys(data).length == 0) return res.status(404).send({ status: false, msg: "Please provide Intern Details." })
-
+        data.collegeName=data.collegeName.toLowerCase()
         let { name, email, mobile, collegeName } = data
 
         //edge cases
