@@ -13,7 +13,7 @@ const createIntern = async function (req, res) {
         if (!name) return res.status(400).send({ status: false, msg: "Intern name must be required." })
         if (!validator.isValidName(name)) return res.status(400).send({ status: false, msg: "Intern name must consist of only leters." })
         
-        if (!mobile) return res.status(400), send({ status: false, msg: "mobile must be required." })
+        if (!mobile) return res.status(400).send({ status: false, msg: "mobile must be required." })
         if (!validator.isValidMobile(mobile)) return res.status(400).send({ status: false, msg: "Please enter valid mobile." })
         let doc= await internModel.findOne({ mobile: mobile,isDeleted:false })
         if (doc) return res.status(400).send({ status: false, msg: "mobile is already registered." })
