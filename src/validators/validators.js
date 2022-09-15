@@ -32,6 +32,11 @@ const isValidFullName=function(fullname){
         return true
     }
 }
+const isValidLink=function(link){
+    if(/^(http[s]?:\/\/.*\.(?:png|jpeg))$/g.test(link)){
+        return true
+    }
+}
 
 
-  module.exports={isValidEmail,isValidId,isValidMobile,isValidName,isValidShortName,isValidFullName}
+  module.exports={isValidEmail,isValidId,isValidMobile,isValidName,isValidShortName,isValidFullName,isValidLink}

@@ -29,16 +29,19 @@ const createCollege = async function (req, res) {
             return res.status(400).send({ status: false, message: "fullName can contain only letters,space,comma,'&',and '-' " })
         }
         //-----------------------------------------------------------------------------------------------------------------
-        let fullName = await collegeModel.findOne({ fullName: body.fullName,isDeleted:false })
-        if(fullName){
-            return res.status(400).send({ status: false, message: "Please provide unique fullName" })
-        }
+        // let fullName = await collegeModel.findOne({ fullName: body.fullName,isDeleted:false })
+        // if(fullName){
+        //     return res.status(400).send({ status: false, message: "Please provide unique fullName" })
+        // }
         //-----------------------------------------------------------------------------------------------------------------
         if (!body.logoLink) {
             return res.status(400).send({ status: false, message: "Please provide logoLink of the college" })
         }
-        if (typeof body.logoLink !== "string") {
-            return res.status(400).send({ status: false, message: "LogoLink is Invalid" })
+        // if (typeof body.logoLink !== "string") {
+        //     return res.status(400).send({ status: false, message: "LogoLink is Invalid" })
+        // }
+        if(!validator.isValidLink(body.logoLink)){
+            return res.status(400).send({status:false,message:"LogoLink is invalid"})
         }
         let data = await collegeModel.create(body)
         return res.status(201).send({ status: true, data: data })
@@ -67,7 +70,7 @@ const collegeDetails = async function (req, res) {
         //     return res.status(404).send({ status: false, message: "No interns found of this college" })
         // }
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
-        return res.status(200).send({data:data})
+        return res.status(200).send({data:data,status:true})
     }
     catch (err) {
         return res.status(500).send({ status: false, message: err.message })
