@@ -2,7 +2,7 @@ const {default: mongoose} = require('mongoose')
 
 
 const isValidEmail = function (mail) {
-    if (/^[a-z0-9_]{3,}@[a-z]{3,}.[com]{3}$/.test(mail)) {
+    if (/^[a-z0-9_]{2,}@[a-z]{3,}.[com]{3}$/.test(mail)) {
     return true;
     }
 }
