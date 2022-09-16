@@ -69,7 +69,7 @@ const collegeDetails = async function (req, res) {
         // }
         //------------------------------------------------------------------------------------------------------------
         let data={name:collegeDetail.name,fullName:collegeDetail.fullName,logoLink:collegeDetail.logoLink,interns:Interns}
-        return res.status(200).send({data:data})
+        return res.status(200).send({data:data,status:true})
     }
     catch (err) {
         return res.status(500).send({ status: false, message: err.message })
