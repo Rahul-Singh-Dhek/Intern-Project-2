@@ -9,7 +9,6 @@ const createIntern = async function (req, res) {
         const data = req.body
         if (Object.keys(data).length == 0) return res.status(404).send({ status: false, msg: "Please provide Intern Details." })
         let { name, email, mobile, collegeName } = data
-        //edge cases
         let test = ""
         //------------------------------------------------------------------------------------------------------------------------------        
         if (!name) {
