@@ -7,10 +7,8 @@ const validator = require("../validators/validators")
 
 const createCollege = async function (req, res) {
 
-
     try {
         let body = req.body
-
         let test = ""
         if ((Object.keys(req.body)).length == 0) {
             return res.status(400).send({ status: false, message: "Please provide details of the college" })
