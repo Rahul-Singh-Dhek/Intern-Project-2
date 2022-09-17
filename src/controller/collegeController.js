@@ -36,11 +36,6 @@ const createCollege = async function (req, res) {
             test = (test.length == 0) ? "fullName can contain only letters,space,comma,'&',and '-' " : test + " ; " + "fullName can contain only letters,space,comma,'&',and '-' "
         }
         //-----------------------------------------------------------------------------------------------------------------
-        // let fullName = await collegeModel.findOne({ fullName: body.fullName,isDeleted:false })
-        // if(fullName){
-        //     return res.status(400).send({ status: false, message: "Please provide unique fullName" })
-        // }
-        //-----------------------------------------------------------------------------------------------------------------
         if (!body.logoLink) {
             test = (test.length == 0) ? "Please provide logoLink of the college" : test + " ; " + "Please provide logoLink of the college"
         } else if (!validator.isValidLink(body.logoLink)) {
